@@ -10,38 +10,29 @@ describe('Swag Labs', () => {
     const cartPage = new CartPage()
     const informationPage = new InformationPage()
 
-    context('Usuário Logado', () => {
-        beforeEach(() => {
-            loginPage.acessar()
-            loginPage.login('standard_user', 'secret_sauce')
-        })
-
-        it('Deve finalizar uma compra com sucesso', () => {
-            productsPage.adicionarFleece()
-            productsPage.acessarCarrinho()
-            cartPage.fazerCheckout()
-            informationPage.preencherFirstName('vrau')
-            informationPage.preencherLastName('vrau')
-            informationPage.preencherPostalCode('0012331')
-            informationPage.acessarOverview()
-        })
-    })
+    
 
     context('Usuário não logado', () => {
         beforeEach(() => {
             loginPage.acessar()
         })
 
-        it('Deve acessar o swaglabs com sucesso', () => {
+        it('00-Deve acessar o swaglabs com sucesso', () => {
             cy.url().should('contains', 'saucedemo')
         })
 
-        it('Deve exibir mensagem ao logar sem informar usuário', () => {
+        it.only('01-Deve exibir mensagem ao logar sem informar usuário', () => {
             cy.get('[data-test="login-button"]').click()
             cy.get('form h3').should('have.text', 'Epic sadface: Username is required')
         })
 
-        it('Deve exibir mensagem ao logar sem informar senh', () => {
+        it('02-Deve exibir mensagem ao logar sem informar senha', () => {
+            loginPage.login('standard_user', '{backspace}')
+            cy.get('[data-test="login-button"]').click()
+            cy.get('[data-test="error"]').should('have.text', 'Epic sadface: Password is required')
+        })
+
+        it('03-Deve exibir mensagem ao logar sem informar usuário e senha', () => {
             loginPage.login('standard_user', '{backspace}')
             cy.get('[data-test="login-button"]').click()
             cy.get('[data-test="error"]').should('have.text', 'Epic sadface: Password is required')
@@ -67,6 +58,23 @@ describe('Swag Labs', () => {
             cy.get('.shopping_cart_link').click()
             cy.get('.cart_quantity').should('have.text', 1)
             cy.get('.inventory_item_name').should('have.text', 'Sauce Labs Fleece Jacket')
+        })
+    })
+    
+    context('Usuário Logado', () => {
+        beforeEach(() => {
+            loginPage.acessar().type('')
+            loginPage.login('standard_user', 'secret_sauce')
+        })
+
+        it('Deve finalizar uma compra com sucesso', () => {
+            productsPage.adicionarFleece()
+            productsPage.acessarCarrinho()
+            cartPage.fazerCheckout()
+            informationPage.preencherFirstName('vrau')
+            informationPage.preencherLastName('vrau')
+            informationPage.preencherPostalCode('0012331')
+            informationPage.acessarOverview()
         })
     })
 })
