@@ -1,0 +1,23 @@
+{
+  "name": "cwi_reset_aula4",
+  "version": "1.0.0",
+  "description": "Aula 4 do Level 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leaogama/CWI_reset_aula4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leaogama/CWI_reset_aula4/issues"
+  },
+  "homepage": "https://github.com/leaogama/CWI_reset_aula4#readme",
+  "dependencies": {
+    "cypress": "^10.11.0"
+  }
+}
