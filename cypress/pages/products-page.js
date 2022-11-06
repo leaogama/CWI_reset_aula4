@@ -14,6 +14,12 @@ class ProductsPage {
     acessarCarrinho() {
         cy.get(this.linkCart).click()
     }
+
+    adicionarProduto(numlista){
+        cy.get('.btn_inventory').eq(numlista).click()
+    }
+
+
 }
 
 export default ProductsPage

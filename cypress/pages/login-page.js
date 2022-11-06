@@ -9,9 +9,17 @@ class LoginPage {
     }
 
     login(username, password) {
-        if(username) cy.get(this.inputUsername).type(username)
-        if(password) cy.get(this.inputPassword).type(password)
-        cy.get(this.btnLogin).click()
+        if(username!= '') {
+            cy.get(this.inputUsername).type(username)
+        } else{
+            cy.get(this.inputUsername).type('')
+        }
+            if(password != '') {
+            cy.get(this.inputPassword).type(password)
+        }else{
+            cy.get(this.inputUsername).type('{enter}')
+        }
+            cy.get(this.btnLogin).click()
     }
 
     preencherUsername(username){
