@@ -345,7 +345,6 @@ describe('Swag Labs', () => {
             cy.get('[data-test="lastName"]').type('qwe')
             cy.get('[data-test="postalCode"]').type('012345')
             cy.get('[data-test="continue"]').click()
-
             cy.get('.title').contains('CHECKOUT: OVERVIEW', { matchCase: false })
             cy.url().should('include', 'checkout-step-two.html')
 
@@ -366,14 +365,8 @@ describe('Swag Labs', () => {
             cy.get('[data-test="finish"]').click()
             cy.get('.title').contains('CHECKOUT: complete!', { matchCase: false })
             cy.url().should('include', 'checkout-complete.html')
-
-            //cy.get('[data-test="error"]').should('have.text', 'Error: Postal Code is required')
         });
 
-
-
     })
-
-
 
 })
